@@ -1,0 +1,35 @@
+{
+	"keywords":[{
+		"name" : "create",
+		"type": "Action",
+		"followedBy": {
+			"included": ["keywordRef"],
+			"excluded": ["keywordRef"],
+			"inclusionFilter":"return word.getName().startsWith(\"b\");"
+		},
+		"tags":["tag1","tag2"]
+	},
+		{
+			"name" : "ball",
+			"type": "Object",
+			"followedBy": {
+				"included": ["keywordRef"],
+				"excluded": ["keywordRef"],
+				"inclusionFilter":"script",
+              "exclusionFilter": "return word.getName().startsWith(\"b\");"
+			},
+			"tags":["tag1","tag2"]
+		},
+		{
+			"name" : "head",
+			"type": "Object",
+			"followedBy": {
+				"included": ["keywordRef"],
+				"excluded": ["keywordRef"],
+				"inclusionFilter":"script",
+				"exclusionFilter":"script"
+			},
+			"tags":["tag1","tag2"]
+		}
+	]
+}
