@@ -11,11 +11,10 @@ import org.junit.Test;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
-import java.io.ByteArrayOutputStream;
+import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Collections;
-import java.util.HashSet;
 
 import static org.junit.Assert.assertNotNull;
 
@@ -39,9 +38,10 @@ public class AnimeGeneratorTest extends AbstractTest {
     @Test
     public void testEmptyPage() throws IOException {
         BufferedImage image = animeGenerator.createPage(new Page("testPage"));
-        ImageIO.write(image,"png",new FileOutputStream("c:\\users\\efreseb\\desktop\\temp.png"));
+        generateTempImage(image);
         assertNotNull(image);
     }
+
     @Test
     public void testPageWithSingleObject() throws IOException {
         Page page = new Page(1, new Scene(new Episode(11, "test", new Season("season 1", new Anime("anime1")))));
@@ -49,7 +49,12 @@ public class AnimeGeneratorTest extends AbstractTest {
         genericObject.setPage(page);
         page.setGenericObjects(Collections.singleton(genericObject) );
         BufferedImage image = animeGenerator.createPage(new Page("testPage"));
-        ImageIO.write(image,"png",new FileOutputStream("c:\\users\\efreseb\\desktop\\temp.png"));
+        generateTempImage(image);
         assertNotNull(image);
+    }
+
+    private void generateTempImage(BufferedImage image) throws IOException {
+        File tempImage = File.createTempFile("temp",".png");
+        ImageIO.write(image,"png",new FileOutputStream(tempImage));
     }
 }
