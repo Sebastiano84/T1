@@ -6,6 +6,7 @@ import com.seb.anime.jpa.db.model.GenericObject;
 import com.seb.anime.jpa.db.model.Page;
 import com.seb.anime.jpa.db.model.Scene;
 import com.seb.anime.jpa.db.model.Season;
+import com.seb.anime.jpa.db.model.Shape;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -31,30 +32,46 @@ public class AnimeGeneratorTest extends AbstractTest {
     }
 
     @Test(expected = NullPointerException.class)
-    public void testNullPage() {
+    public void testNullPage() throws InvalidShapeException {
         BufferedImage image = animeGenerator.createPage(null);
     }
 
     @Test
-    public void testEmptyPage() throws IOException {
-        BufferedImage image = animeGenerator.createPage(new Page("testPage"));
-        generateTempImage(image);
+    public void testEmptyPage() throws IOException, InvalidShapeException {
+        Page page = new Page("testEmptyPage");
+        page.setWidth(200);
+        page.setHeight(200);
+        BufferedImage image = animeGenerator.createPage(page);
+        generateTempImage(image, "temp");
         assertNotNull(image);
     }
 
     @Test
-    public void testPageWithSingleObject() throws IOException {
+    public void testPageWithSingleObject() throws IOException, InvalidShapeException {
         Page page = new Page(1, new Scene(new Episode(11, "test", new Season("season 1", new Anime("anime1")))));
-        GenericObject genericObject = new GenericObject();
-        genericObject.setPage(page);
+        page.setWidth(200);
+        page.setHeight(200);
+        GenericObject genericObject = new GenericObject("test",10,10,10,0,30,30,30,page,null,null, new Shape("com.seb.anime.creator.shapes.Circle"));
         page.setGenericObjects(Collections.singleton(genericObject) );
-        BufferedImage image = animeGenerator.createPage(new Page("testPage"));
-        generateTempImage(image);
+        BufferedImage image = animeGenerator.createPage(page);
+        generateTempImage(image, "temp");
         assertNotNull(image);
     }
 
-    private void generateTempImage(BufferedImage image) throws IOException {
-        File tempImage = File.createTempFile("temp",".png");
+    @Test(expected = InvalidShapeException.class)
+    public void testPageWithSingleObjectWithInvalidShape() throws IOException, InvalidShapeException {
+        Page page = new Page(1, new Scene(new Episode(11, "test", new Season("season 1", new Anime("anime1")))));
+        page.setWidth(200);
+        page.setHeight(200);
+        GenericObject genericObject = new GenericObject("test",10,10,10,0,30,30,30,page,null,null, new Shape("com.seb.anime.creator.shapes.InvalidShape"));
+        page.setGenericObjects(Collections.singleton(genericObject) );
+        BufferedImage image = animeGenerator.createPage(page);
+        generateTempImage(image, "temp");
+        assertNotNull(image);
+    }
+
+    private void generateTempImage(BufferedImage image, String imageName) throws IOException {
+        File tempImage = File.createTempFile(imageName,".png", new File("C:\\Users\\efreseb\\Desktop\\temp"));
         ImageIO.write(image,"png",new FileOutputStream(tempImage));
     }
 }
