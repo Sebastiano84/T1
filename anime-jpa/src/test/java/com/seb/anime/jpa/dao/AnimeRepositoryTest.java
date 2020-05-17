@@ -13,6 +13,7 @@ import static org.junit.Assert.*;
  * Created by efreseb on 12/04/2017.
  */
 
+
 public class AnimeRepositoryTest extends AbstractRepositoryTest  {
 
     @Test

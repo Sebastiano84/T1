@@ -37,6 +37,6 @@ public abstract class AbstractRepositoryTest {
   PageRepository pageRepository;
 
   void cleanUpDatabase() {
-    animeRepository.delete(animeRepository.findAll());
+    animeRepository.deleteAll();
   }
 }

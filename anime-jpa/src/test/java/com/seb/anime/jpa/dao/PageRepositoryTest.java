@@ -54,7 +54,7 @@ public class PageRepositoryTest extends AbstractRepositoryTest  {
         Page savedPage = pageRepository.save(page);
         assertNotNull(savedPage);
 
-        Page found= pageRepository.findOne(savedPage.getId());
+        Page found= pageRepository.findById(savedPage.getId()).orElseThrow();
         assertNotNull(found);
         assertEquals(savedPage,found);
         return found;
