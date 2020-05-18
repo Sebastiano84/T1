@@ -10,7 +10,6 @@ import com.seb.anime.jpa.db.model.Page;
 import com.seb.anime.jpa.db.model.Scene;
 import com.seb.anime.jpa.db.model.Season;
 import java.util.HashSet;
-import java.util.Optional;
 import org.junit.Test;
 import org.springframework.dao.DataIntegrityViolationException;
 
@@ -35,6 +34,7 @@ public class GenericGenericObjectRepositoryTest extends AbstractRepositoryTest {
     saveObject(genericObject);
     genericObject = new GenericObject(name);
     saveObject(genericObject);
+    genericObjectRepository.findAll().forEach(e -> System.out.println(e.toString()));
   }
 
   @Test

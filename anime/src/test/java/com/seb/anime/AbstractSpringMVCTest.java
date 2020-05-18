@@ -11,7 +11,6 @@ import org.springframework.web.context.WebApplicationContext;
  * Created by efreseb on 06/04/2017.
  */
 @SpringBootTest(classes = Main.class)
-@RunWith(SpringRunner.class)
 public class AbstractSpringMVCTest {
     @Autowired
     private WebApplicationContext context;

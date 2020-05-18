@@ -15,7 +15,9 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
@@ -26,6 +28,7 @@ import org.w3c.dom.Node;
 /**
  * Created by efreseb on 27/03/2017.
  */
+@RunWith(SpringRunner.class)
 @Ignore
 public class HomeControllerTest extends AbstractSpringMVCTest {
     @Autowired

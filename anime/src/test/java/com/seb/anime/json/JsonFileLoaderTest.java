@@ -3,12 +3,14 @@ package com.seb.anime.json;
 import com.seb.anime.AbstractSpringMVCTest;
 import com.seb.anime.json.toHtml.ValidationResult;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import org.springframework.test.context.junit4.SpringRunner;
 
 import static org.hamcrest.Matchers.*;
 import static org.junit.Assert.*;
@@ -17,6 +19,7 @@ import static org.junit.Assert.*;
  * Created by efreseb on 03/04/2017.
  * JsonFileLoader test class
  */
+@RunWith(SpringRunner.class)
 public class JsonFileLoaderTest extends AbstractSpringMVCTest {
     private static final Logger LOGGER = LoggerFactory.getLogger(JsonFileLoaderTest.class);
     @Autowired
